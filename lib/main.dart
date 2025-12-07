@@ -35,6 +35,19 @@ class _InputPageState extends State<InputPage> {
       appBar: AppBar(
         title: Text("Title"),
       ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          // Main contents
+          Container(
+            child: Text('Middle'),
+          ),
+          // Navigation buttons
+          Container(
+            child: Text('Bottom'),
+          )
+        ],
+      ),
     );
   }
 }
