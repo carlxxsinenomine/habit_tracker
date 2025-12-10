@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habit_tracker/components/home/day_box.dart';
 
 class InputPage extends StatefulWidget {
   const InputPage({super.key});
@@ -15,24 +16,33 @@ class _InputPageState extends State<InputPage> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           // Text and Notifications
-          Container(
-            child: Row(
-              children: <Widget>[
+          Expanded(
+            child: Container(
 
-              ],
-            )
+            ),
           ),
           // Day section
-          Container(
-            child: Text('Day Row'),
+          Expanded(
+            child: Container(
+                margin: EdgeInsets.only(left: 10.0),
+                child: Row(
+                children: <Widget>[
+                  DayBox(color: Color(0xFF8BAE66))
+                ],
+              )
+            ),
           ),
           // Habits section
-          Container(
-            child: Text('Habits'),
+          Expanded(
+            child: Container(
+              child: Text('Habits'),
+            ),
           ),
           // Buttons section
-          Container(
-            child: Text('Buttons'),
+          Expanded(
+            child: Container(
+              child: Text('Buttons'),
+            ),
           )
         ],
       ),
