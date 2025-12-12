@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habit_tracker/components/home/day_box.dart';
+import 'package:habit_tracker/components/home/habit_box.dart';
 
 class InputPage extends StatefulWidget {
   const InputPage({super.key});
@@ -19,25 +20,27 @@ class _InputPageState extends State<InputPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               SizedBox(
-                height: 53.0,
+                height: 73,
               ),
               // Text and Notifications
               // Header
               Expanded(
                 child: Container(
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
+                            // mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
                               Text(
                                   'Good Morning,',
                                   style: TextStyle(
-                                      fontFamily: 'Obviously',
-                                      fontSize: 25.0,
-                                      color: Colors.black,
+                                    fontFamily: 'Obviously',
+                                    fontSize: 25.0,
+                                    color: Colors.black,
                                   )
                               ),
                               Text(
@@ -46,12 +49,32 @@ class _InputPageState extends State<InputPage> {
                                     fontFamily: 'Obviously',
                                     fontSize: 40.0,
                                     color: Colors.black,
-                                    height: 0.5,
+                                    height: 0.5
                                   )
                               ),
                             ],
                           )
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.notifications_active,
+                                color: Colors.black,
+                              )
+                          ),
+                          IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.notifications_active,
+                                color: Colors.black,
+                              )
+                          )
+                        ],
                       )
+
                     ],
                   ),
                 ),
@@ -61,16 +84,19 @@ class _InputPageState extends State<InputPage> {
                 child: Container(
                     child: Row(
                     children: <Widget>[
-                      DayBox(color: Color(0xFF8BAE66))
+                      DayBox(color: Color(0xFF8BAE66)),
+                      DayBox(color: Color(0xFFE67E22))
                     ],
                   )
                 ),
               ),
               // Habits section
               Expanded(
-                child: Container(
-                  child: Text('Habits'),
-                ),
+                child: Row(
+                  children: [
+                    HabitBox(onTap: () {}),
+                  ],
+                )
               ),
               // Buttons section
               Expanded(

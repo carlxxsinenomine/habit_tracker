@@ -8,10 +8,11 @@ class DayBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(right: 10),
       width: 82.0,
       height: 77.0,
       decoration: BoxDecoration(
-        color: Color(0xFF8BAE66),
+        color: color,
         borderRadius: BorderRadius.circular(15.0),
         boxShadow: [
           BoxShadow(
