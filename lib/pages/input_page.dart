@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habit_tracker/components/home/add_button.dart';
 import 'package:habit_tracker/components/home/day_box.dart';
 import 'package:habit_tracker/components/home/habit_box.dart';
 
@@ -100,8 +101,10 @@ class _InputPageState extends State<InputPage> {
               ),
               // Buttons section
               Expanded(
-                child: Container(
-                  child: Text('Buttons'),
+                child: Row(
+                  children: <Widget>[
+                    AddButton(onPressed: () {})
+                  ],
                 ),
               )
             ],
