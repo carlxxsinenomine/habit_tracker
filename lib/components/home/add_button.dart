@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habit_tracker/constants.dart';
 
 class AddButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -12,14 +13,14 @@ class AddButton extends StatelessWidget {
       child: Transform.rotate(
         angle: 0.785398, // 45 deg
         child: Container(
-          width: 95,
-          height: 95,
+          width: 80,
+          height: 80,
           decoration: BoxDecoration(
-            color: Color(0xFF456F8E),
+            color: kAddButtonColor,
             borderRadius: BorderRadius.circular(15.0),
             boxShadow: <BoxShadow>[
               BoxShadow(
-                offset: Offset(7, 6),
+                offset: Offset(6, 4),
               )
             ]
           ),

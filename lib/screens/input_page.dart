@@ -92,23 +92,36 @@ class _InputPageState extends State<InputPage> {
               // Habits section
               Expanded(
                 flex: 4,
-                child: Row(
+                child: Column(
                   children: [
-                    HabitBox(onTap: () {}),
-
+                    HabitBox(onTap: () {}, title: "Habit", day: "Monday",),
+                    HabitBox(onTap: () {}, title: "Habit", day: "Monday",),
+                    HabitBox(onTap: () {}, title: "Habit", day: "Monday",),
                   ],
                 ),
               ),
               // Buttons section
               Container(
-                color: Colors.cyan,
+                // color: Colors.cyan,
                 height: 167.0,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    Text("Left", style: TextStyle(color: Colors.black54),),
+                    Container(
+                      padding:EdgeInsets.only(top: 40),
+                      child: Text("Left",
+                          style: TextStyle(
+                              color: Colors.black54),
+                        )
+                    ),
                     AddButton(onPressed: () {}),
-                    Text("Right", style: TextStyle(color: Colors.black54),)
+                    Container(
+                        padding:EdgeInsets.only(top: 40),
+                        child: Text("Right",
+                          style: TextStyle(
+                              color: Colors.black54),
+                        )
+                    )
                   ],
                 ),
               )

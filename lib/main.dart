@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pages/input_page.dart';
+import 'screens/input_page.dart';
 
 void main() => runApp(HabitTracker());
 
