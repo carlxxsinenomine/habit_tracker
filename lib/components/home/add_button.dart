@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AddButton extends StatelessWidget {
   final VoidCallback onPressed;
 
-  const AddButton({required this.onPressed});
+  const AddButton({super.key, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +12,8 @@ class AddButton extends StatelessWidget {
       child: Transform.rotate(
         angle: 0.785398, // 45 deg
         child: Container(
-          width: 118.61,
-          height: 118.61,
+          width: 95,
+          height: 95,
           decoration: BoxDecoration(
             color: Color(0xFF456F8E),
             borderRadius: BorderRadius.circular(15.0),
