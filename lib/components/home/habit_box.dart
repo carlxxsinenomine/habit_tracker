@@ -5,12 +5,18 @@ class HabitBox extends StatelessWidget {
   final VoidCallback onTap;
   final String title;
   final String day;
-  const HabitBox({super.key, required this.onTap, required this.title, required this.day });
+
+  const HabitBox({
+    super.key,
+    required this.onTap,
+    required this.title,
+    required this.day
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 370.0,
+      width: double.infinity,
       height: 90.0,
       margin: EdgeInsets.only(top: 20.0),
       decoration: BoxDecoration(
@@ -52,11 +58,11 @@ class HabitBox extends StatelessWidget {
           ),
           GestureDetector(
             child: Container(
-              width: 50.0,
-              height: 50.0,
+              width: 45.0,
+              height: 45.0,
               decoration: BoxDecoration(
                 color: Color(0xFF1B211A),
-                borderRadius: BorderRadius.circular(17.0)
+                borderRadius: BorderRadius.circular(20.0)
               ),
               child: Icon(
                 Icons.check,
@@ -64,7 +70,6 @@ class HabitBox extends StatelessWidget {
               ),
             ),
           ),
-
         ],
       )
     );

@@ -4,7 +4,10 @@ import 'package:habit_tracker/constants.dart';
 class AddButton extends StatelessWidget {
   final VoidCallback onPressed;
 
-  const AddButton({super.key, required this.onPressed});
+  const AddButton({
+    super.key,
+    required this.onPressed
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 class DayBox extends StatelessWidget {
   final Color? color;
 
-  const DayBox({required this.color});
+  const DayBox({
+    super.key,
+    required this.color
+  });
 
   @override
   Widget build(BuildContext context) {
