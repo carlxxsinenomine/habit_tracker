@@ -4,7 +4,9 @@ import 'screens/input_page.dart';
 void main() => runApp(HabitTracker());
 
 class HabitTracker extends StatelessWidget {
-  const HabitTracker({super.key});
+  const HabitTracker({
+    super.key
+  });
 
   @override
   Widget build(BuildContext context) {
