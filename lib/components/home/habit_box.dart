@@ -18,7 +18,11 @@ class HabitBox extends StatelessWidget {
     return Container(
         width: double.infinity,
         height: 90.0,
-        margin: EdgeInsets.only(top: 20.0),
+        margin: EdgeInsets.only(
+            left:17,
+            right: 17,
+            bottom: 15.0
+        ),
         decoration: BoxDecoration(
             color: Color(0xFF8BAE66),
             borderRadius: BorderRadius.circular(15.0),
