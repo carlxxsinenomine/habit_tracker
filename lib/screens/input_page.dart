@@ -11,6 +11,8 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  var isPressed = false;
+
   List<Map<String, String>> habits = [
     {"title": "Habit 1", "day": "Monday"},
     {"title": "Habit 2", "day": "Tuesday"}
@@ -20,6 +22,11 @@ class _InputPageState extends State<InputPage> {
       habits.add(
         {"title": title, "day": day}
       );
+      if(isPressed) {
+        isPressed = false;
+      } else {
+        isPressed = true;
+      }
     });
   }
   @override
@@ -138,6 +145,7 @@ class _InputPageState extends State<InputPage> {
                     )
                 ),
                 AddButton(
+                  isPressed: isPressed,
                     onPressed: () => _addHabit("Habit 1", "Everyday")
                 ),
                 Container(
