@@ -145,7 +145,6 @@ class _InputPageState extends State<InputPage> {
                     )
                 ),
                 AddButton(
-                  isPressed: isPressed,
                     onPressed: () => _addHabit("Habit 1", "Everyday")
                 ),
                 Container(
