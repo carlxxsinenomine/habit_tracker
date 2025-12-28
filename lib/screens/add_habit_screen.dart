@@ -1,53 +1,78 @@
 import 'package:flutter/material.dart';
 
-class AddHabitScreen extends StatefulWidget {
+class AddHabitScreen extends StatelessWidget {
   const AddHabitScreen({super.key});
 
-  @override
-  State<AddHabitScreen> createState() => _AddHabitScreenState();
-}
-
-class _AddHabitScreenState extends State<AddHabitScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-              "Habit Name",
-              style: TextStyle(
-                color: Colors.black,
-              )
-          ),
-          TextField(
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Enter Habit Name',
-              hintStyle: TextStyle(
-                color: Colors.black,
-              )
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+                "Habit Name",
+                style: TextStyle(
+                  color: Colors.black,
+                )
             ),
-          ),
-          Text(
-              "Repeat",
-              style: TextStyle(
-                color: Colors.black,
-              )
-          ),
-          ElevatedButton(
-              onPressed: () async {
-                final TimeOfDay? time = await showTimePicker(
+            TextField(
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Enter Habit Name',
+                  hintStyle: TextStyle(
+                    color: Colors.black,
+                  )
+              ),
+            ),
+            Text(
+                "Description",
+                style: TextStyle(
+                  color: Colors.black,
+                )
+            ),
+            TextField(
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Description',
+                  hintStyle: TextStyle(
+                    color: Colors.black,
+                  )
+              ),
+            ),
+            Text(
+                "Repeat",
+                style: TextStyle(
+                  color: Colors.black,
+                )
+            ),
+            ElevatedButton(
+                onPressed: () async {
+                  final TimeOfDay? time = await showTimePicker(
                     context: context,
                     initialTime: TimeOfDay.now(),
-                );
-              },
-              child: Text("Select Time")
-          ),
-
-        ],
+                    initialEntryMode: TimePickerEntryMode.dialOnly,
+                  );
+                },
+                child: Text("Select Time")
+            ),
+            Row(
+              children: <Widget>[
+                ElevatedButton(
+                    onPressed: () {},
+                    child: Text("Close")
+                ),
+                ElevatedButton(
+                    onPressed: () {},
+                    child: Text("Save")
+                )
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
