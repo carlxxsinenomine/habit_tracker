@@ -141,27 +141,7 @@ class _InputPageState extends State<InputPage> {
                 AddButton(
                     onPressed: () {
                       // _addHabit("Habit 1", "Everyday");
-                      showModalBottomSheet<void>(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return SizedBox(
-                            height: 900,
-                            child: Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  const Text('Modal BottomSheet'),
-                                  ElevatedButton(
-                                    child: const Text('Close BottomSheet'),
-                                    onPressed: () => Navigator.pop(context),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      );
+                      Navigator.pushNamed(context, '/add_habit');
                     }
                 ),
                 Container(
