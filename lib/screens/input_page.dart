@@ -11,8 +11,6 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  var isPressed = false;
-
   List<Map<String, String>> habits = [
     {"title": "Habit 1", "day": "Monday"},
     {"title": "Habit 2", "day": "Tuesday"}
@@ -22,11 +20,6 @@ class _InputPageState extends State<InputPage> {
       habits.add(
         {"title": title, "day": day}
       );
-      if(isPressed) {
-        isPressed = false;
-      } else {
-        isPressed = true;
-      }
     });
   }
   @override
@@ -146,7 +139,30 @@ class _InputPageState extends State<InputPage> {
                     )
                 ),
                 AddButton(
-                    onPressed: () => _addHabit("Habit 1", "Everyday")
+                    onPressed: () {
+                      // _addHabit("Habit 1", "Everyday");
+                      showModalBottomSheet<void>(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return SizedBox(
+                            height: 900,
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  const Text('Modal BottomSheet'),
+                                  ElevatedButton(
+                                    child: const Text('Close BottomSheet'),
+                                    onPressed: () => Navigator.pop(context),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    }
                 ),
                 Container(
                     padding:EdgeInsets.only(top: 40),

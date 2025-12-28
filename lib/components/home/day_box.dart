@@ -15,14 +15,14 @@ class DayBox extends StatelessWidget {
       width: 82.0,
       height: 77.0,
       decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(15.0),
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 1,
-            offset: Offset(4, 6)
-          )
-        ]
+          color: color,
+          borderRadius: BorderRadius.circular(15.0),
+          boxShadow: [
+            BoxShadow(
+                blurRadius: 1,
+                offset: Offset(4, 6)
+            )
+          ]
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
