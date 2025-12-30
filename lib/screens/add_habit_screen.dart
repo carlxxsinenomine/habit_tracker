@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:habit_tracker/constants.dart';
+import 'package:habit_tracker/models/habit.dart';
 
 class AddHabitScreen extends StatelessWidget {
   const AddHabitScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final titleController = TextEditingController();
+    final descriptionController = TextEditingController();
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -28,6 +32,7 @@ class AddHabitScreen extends StatelessWidget {
                   height: 10.0,
                 ),
                 TextField(
+                  controller: titleController,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Enter Habit Name',
@@ -49,6 +54,7 @@ class AddHabitScreen extends StatelessWidget {
                   height: 10.0,
                 ),
                 TextField(
+                  controller: descriptionController,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Description',
@@ -84,20 +90,19 @@ class AddHabitScreen extends StatelessWidget {
                 ),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
+            Container(
+              child: ElevatedButton(
+                  onPressed: () {
+                    // Go back and send new Habit object
+                    Navigator.pop(context, Habit(
+                        title: titleController.text,
+                        description: descriptionController.text,
+                        repeatedDays: 'repeatedDays',
+                        time: 'time'
+                    ));
                     },
-                    child: Text("Close")
-                ),
-                ElevatedButton(
-                    onPressed: () {},
-                    child: Text("Save")
-                )
-              ],
+                  child: Text("Save")
+              ),
             )
           ],
         ),

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:habit_tracker/components/home/add_button.dart';
 import 'package:habit_tracker/components/home/day_box.dart';
 import 'package:habit_tracker/components/home/habit_box.dart';
+import 'package:habit_tracker/models/habit.dart';
+import 'package:habit_tracker/screens/add_habit_screen.dart';
 
 class InputPage extends StatefulWidget {
   const InputPage({super.key});
@@ -11,6 +13,8 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  final HabitManager habitList = HabitManager();
+
   List<Map<String, String>> habits = [
     {"title": "Habit 1", "day": "Monday"},
     {"title": "Habit 2", "day": "Tuesday"}
@@ -139,9 +143,14 @@ class _InputPageState extends State<InputPage> {
                     )
                 ),
                 AddButton(
-                    onPressed: () {
+                    onPressed: () async {
                       // _addHabit("Habit 1", "Everyday");
-                      Navigator.pushNamed(context, '/add_habit');
+                      final res = await Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => AddHabitScreen())
+                      );
+
+
                     }
                 ),
                 Container(
