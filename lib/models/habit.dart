@@ -1,28 +1,32 @@
-class HabitManager {
-  late List<Habit> habitList;
+class HabitManager<T> {
+  late List<T> habitList;
 
   void addHabit(item) {
     habitList.add(item);
   }
 
-  List<Habit> getList() {
+  List<T> getList() {
     return habitList;
-  }
-
-  Map<String, String> getHabit(habit) {
-    return {'title': habit.title, 'day': habit.day};
   }
 }
 
 class Habit {
-  final String title;
-  final String description;
-  final String repeatedDays;
-  final String time;
+  final String _title;
+  final String _description;
+  final String _repeatedDays;
+  final String _time;
   Habit({
-    this.description = "None",
-    required this.title,
-    required this.repeatedDays,
-    required this.time,
-  });
+    description = "None",
+    required title,
+    required repeatedDays,
+    required time,
+  }) :  _title = title,
+        _repeatedDays = repeatedDays,
+        _time = time,
+        _description = description;
+
+  String get time => _time;
+  String get title => _title;
+  String get description => _description;
+  String get repeatedDays => _repeatedDays;
 }

@@ -13,12 +13,14 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  final HabitManager habitList = HabitManager();
+  final HabitManager habitManager = HabitManager();
 
   List<Map<String, String>> habits = [
     {"title": "Habit 1", "day": "Monday"},
     {"title": "Habit 2", "day": "Tuesday"}
   ];
+
+
   void _addHabit(String title, String day) {
     setState(() {
       habits.add(
@@ -26,6 +28,8 @@ class _InputPageState extends State<InputPage> {
       );
     });
   }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -116,7 +120,7 @@ class _InputPageState extends State<InputPage> {
             flex: 4,
             child: CustomScrollView(
               slivers: [
-                SliverList.list(children: habits.map(
+                SliverList.list(children: habitManager.getList().map(
                     (habit) => HabitBox(
                         onTap: () {},
                         title: habit["title"]!,
@@ -145,12 +149,12 @@ class _InputPageState extends State<InputPage> {
                 AddButton(
                     onPressed: () async {
                       // _addHabit("Habit 1", "Everyday");
-                      final res = await Navigator.push(
+                      final habit = await Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => AddHabitScreen())
                       );
 
-
+                      habitManager.addHabit(habit);
                     }
                 ),
                 Container(
