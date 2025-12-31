@@ -98,7 +98,7 @@ class AddHabitScreen extends StatelessWidget {
                         title: titleController.text,
                         description: descriptionController.text,
                         repeatedDays: 'repeatedDays',
-                        time: 'time'
+                        day: 'time'
                     ));
                     },
                   child: Text("Save")

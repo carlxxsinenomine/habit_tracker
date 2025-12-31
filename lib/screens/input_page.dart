@@ -13,7 +13,7 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  final HabitManager habitManager = HabitManager();
+  final HabitManager<Habit> habitManager = HabitManager();
 
   List<Map<String, String>> habits = [
     {"title": "Habit 1", "day": "Monday"},
@@ -123,8 +123,8 @@ class _InputPageState extends State<InputPage> {
                 SliverList.list(children: habitManager.getList().map(
                     (habit) => HabitBox(
                         onTap: () {},
-                        title: habit["title"]!,
-                        day: habit["day"]!
+                        title: habit.title,
+                        day: habit.day
                     )
                   ).toList()
                 ),
@@ -153,8 +153,10 @@ class _InputPageState extends State<InputPage> {
                           context,
                           MaterialPageRoute(builder: (context) => AddHabitScreen())
                       );
-
-                      habitManager.addHabit(habit);
+                      setState(() {
+                        habitManager.addHabit(habit);
+                      });
+                      print(habitManager.getList().length);
                     }
                 ),
                 Container(
