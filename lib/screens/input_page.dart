@@ -156,7 +156,6 @@ class _InputPageState extends State<InputPage> {
                       setState(() {
                         habitManager.addHabit(habit);
                       });
-                      print(habitManager.getList().length);
                     }
                 ),
                 Container(

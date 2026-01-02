@@ -1,21 +1,22 @@
 import 'package:flutter/cupertino.dart';
-import 'package:habit_tracker/constants.dart';
 
-class SelectionButton extends StatelessWidget {
+class ScheduleButton extends StatelessWidget {
   final VoidCallback? onPress;
+  final String? label;
 
-  const SelectionButton({super.key, required this.onPress});
+  ScheduleButton({required this.onPress, this.label});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onPress,
       child: Container(
-        width: 40,
-        height: 20,
+        height: 50,
+        width: 80,
         decoration: BoxDecoration(
-          color: kAddButtonColor
+          color: Color(0xFFF3F6F4),
         ),
+        child: Text(label!),
       ),
     );
   }

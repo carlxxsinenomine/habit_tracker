@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habit_tracker/components/add_habit_screen/schedule_button.dart';
 import 'package:habit_tracker/constants.dart';
 import 'package:habit_tracker/models/habit.dart';
 
@@ -72,14 +73,45 @@ class AddHabitScreen extends StatelessWidget {
                     "Repeat",
                     style: kLabelStyle
                 ),
+                Container(
+                  height: 60,
+                  decoration: BoxDecoration(
+                    color: Color(0xFFDADADA)
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      ScheduleButton(
+                          onPress: () {},
+                          label: "One Time",
+                      ),
+                      ScheduleButton(
+                        onPress: () {},
+                        label: "Daily",
+                      ),
+                      ScheduleButton(
+                        onPress: () {},
+                        label: "Monthly",
+                      ),
+                    ],
+                  ),
+                ),
                 SizedBox(
                   height: 10.0,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: <Widget>[
+
+                      ],
+                    ),
+                  ),
                 ),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
                       onPressed: () async {
-                        final TimeOfDay? time = await showTimePicker(
+                        final TimeOfDay? _ = await showTimePicker(
                           context: context,
                           initialTime: TimeOfDay.now(),
                           initialEntryMode: TimePickerEntryMode.dialOnly,
