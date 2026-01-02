@@ -20,7 +20,7 @@ class HabitTracker extends StatelessWidget {
       },
       theme: ThemeData.dark().copyWith(
         useMaterial3: false,
-        scaffoldBackgroundColor: Color(0xFFDBF7D7),
+        scaffoldBackgroundColor: Color(0xFFFBFBFB),
         colorScheme: ColorScheme.light(
           primary: Color(0xFF0A0E21)
         )

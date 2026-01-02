@@ -11,12 +11,20 @@ class ScheduleButton extends StatelessWidget {
     return GestureDetector(
       onTap: onPress,
       child: Container(
-        height: 50,
-        width: 80,
+        height: 45,
+        width: 90,
         decoration: BoxDecoration(
-          color: Color(0xFFF3F6F4),
+          color: Color(0xFFFBFBFB),
+          borderRadius: BorderRadius.circular(15)
         ),
-        child: Text(label!),
+        child: Center(
+            child: Text(
+              label!,
+              style: TextStyle(
+                color: Color(0xFF000000)
+              ),
+            )
+        ),
       ),
     );
   }

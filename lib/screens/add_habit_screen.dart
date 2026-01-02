@@ -11,13 +11,33 @@ class AddHabitScreen extends StatelessWidget {
     final titleController = TextEditingController();
     final descriptionController = TextEditingController();
 
+    void showWarningSnackBar(BuildContext context, String message) {
+      final snackBar = SnackBar(
+        content: Text(
+          message,
+          style: const TextStyle(color: Colors.white),
+        ),
+        margin: EdgeInsets.only(bottom: 10),
+        backgroundColor: Colors.orange[800],
+        behavior: SnackBarBehavior.floating,
+        duration: const Duration(seconds: 3),
+        action: SnackBarAction(
+          label: 'Dismiss',
+          onPressed: () {
+          },
+        ),
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('Add Habit'),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 18.0, bottom: 18.0),
+        padding: const EdgeInsets.only(left: 17.0, right: 17.0, top: 18.0, bottom: 18.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,7 +96,8 @@ class AddHabitScreen extends StatelessWidget {
                 Container(
                   height: 60,
                   decoration: BoxDecoration(
-                    color: Color(0xFFDADADA)
+                      color: Color(0xFFDDDDDD),
+                      borderRadius: BorderRadius.circular(20)
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -125,13 +146,17 @@ class AddHabitScreen extends StatelessWidget {
             Container(
               child: ElevatedButton(
                   onPressed: () {
-                    // Go back and send new Habit object
-                    Navigator.pop(context, Habit(
-                        title: titleController.text,
-                        description: descriptionController.text,
-                        repeatedDays: 'repeatedDays',
-                        day: 'time'
-                    ));
+                      if(titleController.text.isEmpty) {
+                        showWarningSnackBar(context, 'Invalid Title.');
+                      } else {
+                        // Go back and send new Habit object
+                        Navigator.pop(context, Habit(
+                            title: titleController.text,
+                            description: descriptionController.text,
+                            repeatedDays: 'repeatedDays',
+                            day: 'time'
+                        ));
+                      }
                     },
                   child: Text("Save")
               ),
