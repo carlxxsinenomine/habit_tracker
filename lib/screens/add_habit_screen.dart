@@ -3,9 +3,14 @@ import 'package:habit_tracker/components/add_habit_screen/schedule_button.dart';
 import 'package:habit_tracker/constants.dart';
 import 'package:habit_tracker/models/habit.dart';
 
-class AddHabitScreen extends StatelessWidget {
+class AddHabitScreen extends StatefulWidget {
   const AddHabitScreen({super.key});
 
+  @override
+  State<AddHabitScreen> createState() => _AddHabitScreenState();
+}
+
+class _AddHabitScreenState extends State<AddHabitScreen> {
   @override
   Widget build(BuildContext context) {
     final titleController = TextEditingController();
@@ -27,7 +32,6 @@ class AddHabitScreen extends StatelessWidget {
           },
         ),
       );
-
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
 
@@ -46,8 +50,8 @@ class AddHabitScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                    "Habit Name",
-                    style: kLabelStyle,
+                  "Habit Name",
+                  style: kLabelStyle,
                 ),
                 SizedBox(
                   height: 10.0,
@@ -103,11 +107,12 @@ class AddHabitScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       ScheduleButton(
-                          onPress: () {},
-                          label: "One Time",
+                        onPress: () {},
+                        label: "One Time",
                       ),
                       ScheduleButton(
                         onPress: () {},
+                        isPressed: true,
                         label: "Daily",
                       ),
                       ScheduleButton(
@@ -144,20 +149,21 @@ class AddHabitScreen extends StatelessWidget {
               ],
             ),
             Container(
+              width: double.infinity,
               child: ElevatedButton(
                   onPressed: () {
-                      if(titleController.text.isEmpty) {
-                        showWarningSnackBar(context, 'Invalid Title.');
-                      } else {
-                        // Go back and send new Habit object
-                        Navigator.pop(context, Habit(
-                            title: titleController.text,
-                            description: descriptionController.text,
-                            repeatedDays: 'repeatedDays',
-                            day: 'time'
-                        ));
-                      }
-                    },
+                    if(titleController.text.isEmpty) {
+                      showWarningSnackBar(context, 'Invalid Title.');
+                    } else {
+                      // Go back and send new Habit object
+                      Navigator.pop(context, Habit(
+                          title: titleController.text,
+                          description: descriptionController.text,
+                          repeatedDays: 'repeatedDays',
+                          day: 'time'
+                      ));
+                    }
+                  },
                   child: Text("Save")
               ),
             )

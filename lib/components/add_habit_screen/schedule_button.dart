@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:habit_tracker/constants.dart';
 
 class ScheduleButton extends StatelessWidget {
   final VoidCallback? onPress;
   final String? label;
-
-  ScheduleButton({required this.onPress, this.label});
+  final bool isPressed;
+  ScheduleButton({required this.onPress, this.isPressed = false, this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class ScheduleButton extends StatelessWidget {
         height: 45,
         width: 90,
         decoration: BoxDecoration(
-          color: Color(0xFFFBFBFB),
+          color: isPressed? kActiveDay : kNotActiveDay,
           borderRadius: BorderRadius.circular(15)
         ),
         child: Center(
