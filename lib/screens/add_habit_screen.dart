@@ -28,6 +28,8 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
   SCHEDULE selectedSchedule = SCHEDULE.anytime;
   bool everydayToggled = false;
   List<String> activeSelection = [];
+  List<String> selectedDays = [];
+  List<String> selectedMonths = [];
 
   @override
   void initState() {
@@ -68,50 +70,6 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              // Column(
-              //   crossAxisAlignment: CrossAxisAlignment.start,
-              //   children: <Widget>[
-              //     Text(
-              //       "Habit Name",
-              //       style: kLabelStyle,
-              //     ),
-              //     SizedBox(
-              //       height: 10.0,
-              //     ),
-              //     TextField(
-              //       controller: titleController,
-              //       decoration: InputDecoration(
-              //           border: OutlineInputBorder(),
-              //           hintText: 'Enter Habit Name',
-              //           hintStyle: TextStyle(
-              //             color: Colors.black,
-              //           )
-              //       ),
-              //     ),
-              //   ],
-              // ),
-              // Column(
-              //   crossAxisAlignment: CrossAxisAlignment.start,
-              //   children: <Widget>[
-              //     Text(
-              //         "Description",
-              //         style: kLabelStyle
-              //     ),
-              //     SizedBox(
-              //       height: 10.0,
-              //     ),
-              //     TextField(
-              //       controller: descriptionController,
-              //       decoration: InputDecoration(
-              //           border: OutlineInputBorder(),
-              //           hintText: 'Description',
-              //           hintStyle: TextStyle(
-              //             color: Colors.black,
-              //           )
-              //       ),
-              //     ),
-              //   ],
-              // ),
               Container(
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                   decoration: BoxDecoration(
@@ -134,6 +92,7 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                     ],
                   )
               ),
+              SizedBox(height: 10,),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                 decoration: BoxDecoration(
@@ -141,9 +100,10 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                     borderRadius: BorderRadius.circular(15)
                 ),
                 child: ColorPicker(onColorChanged: (Color value) {  },
-                    
+
                 ),
               ),
+              SizedBox(height: 10,),
               Container(
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                   decoration: BoxDecoration(
@@ -156,61 +116,71 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                       Text(
                         "Do it at",
                         style: TextStyle(
-                          color: Colors.black54
+                            color: Colors.black
                         ),
                       ),
                       SizedBox(
                         height: 10,
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          DayScheduleContainer(
-                              onPress: () {
-                                setState(() {
-                                  selectedSchedule = SCHEDULE.anytime;
-                                });
-                              },
-                              isPressed: (selectedSchedule == SCHEDULE.anytime),
-                              label: "Anytime"
+                          Expanded(
+                            child: DayScheduleContainer(
+                                onPress: () {
+                                  setState(() {
+                                    selectedSchedule = SCHEDULE.anytime;
+                                  });
+                                },
+                                isPressed: (selectedSchedule == SCHEDULE.anytime),
+                                label: "Anytime"
+                            ),
                           ),
-                          DayScheduleContainer(
-                              onPress: () {
-                                setState(() {
-                                  selectedSchedule = SCHEDULE.morning;
-                                });
-                              },
-                              isPressed: (selectedSchedule == SCHEDULE.morning),
-                              label: "Morning"
+                          SizedBox(width: 8),
+                          Expanded(
+                            child: DayScheduleContainer(
+                                onPress: () {
+                                  setState(() {
+                                    selectedSchedule = SCHEDULE.morning;
+                                  });
+                                },
+                                isPressed: (selectedSchedule == SCHEDULE.morning),
+                                label: "Morning"
+                            ),
                           ),
                         ],
                       ),
+                      SizedBox(height: 8),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          DayScheduleContainer(
-                              onPress: () {
-                                setState(() {
-                                  selectedSchedule = SCHEDULE.afternoon;
-                                });
-                              },
-                              isPressed: (selectedSchedule == SCHEDULE.afternoon),
-                              label: "Afternoon"
+                          Expanded(
+                            child: DayScheduleContainer(
+                                onPress: () {
+                                  setState(() {
+                                    selectedSchedule = SCHEDULE.afternoon;
+                                  });
+                                },
+                                isPressed: (selectedSchedule == SCHEDULE.afternoon),
+                                label: "Afternoon"
+                            ),
                           ),
-                          DayScheduleContainer(
-                              onPress: () {
-                                setState(() {
-                                  selectedSchedule = SCHEDULE.evening;
-                                });
-                              },
-                              isPressed: (selectedSchedule == SCHEDULE.evening),
-                              label: "Evening"
+                          SizedBox(width: 8),
+                          Expanded(
+                            child: DayScheduleContainer(
+                                onPress: () {
+                                  setState(() {
+                                    selectedSchedule = SCHEDULE.evening;
+                                  });
+                                },
+                                isPressed: (selectedSchedule == SCHEDULE.evening),
+                                label: "Evening"
+                            ),
                           ),
                         ],
                       )
                     ],
                   )
               ),
+              SizedBox(height: 10,),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                 decoration: BoxDecoration(
@@ -268,23 +238,30 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                         ],
                       ),
                     ),
+                    SizedBox(height: 10,),
                     Row(
                       children: <Widget>[
                         IconButton(
                             onPressed: () {
                               setState(() {
-                                if(!everydayToggled)
+                                if(!everydayToggled) {
                                   everydayToggled = true;
-                                else
+                                  selectedDays = [...days];
+                                }
+                                else {
                                   everydayToggled = false;
+                                  selectedDays = [];
+                                }
                               });
                             },
                             color: Colors.black54,
                             icon: everydayToggled ? Icon(Icons.check_circle, color: Colors.black,) :Icon(Icons.circle_outlined)
                         ),
-                        Text('Everyday', style: TextStyle(color: Colors.black),)
+                        Text('Everyday', style: TextStyle(color: Colors.black),
+                        )
                       ],
                     ),
+                    SizedBox(height: 10,),
                     Container(
                       margin: EdgeInsets.symmetric(vertical: 10),
                       child: SingleChildScrollView(
@@ -292,12 +269,36 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                         child: Row(
                           children: activeSelection.map(
                                   (item) => SelectionButton(
-                                      onPress: () {},
+                                      onPress: () {
+                                        setState(() {
+                                          if(selectedOption == OPTION.daily) {
+                                            if(!selectedDays.contains(item)) {
+                                              selectedDays.add(item);
+                                            } else {
+                                              selectedDays.remove(item);
+                                            }
+
+                                            if(selectedDays.length == 7) {
+                                              everydayToggled = true;
+                                            } else {
+                                              everydayToggled = false;
+                                            }
+                                          } else if (selectedOption == OPTION.monthly) {
+                                            if(!selectedMonths.contains(item)) {
+                                              selectedMonths.add(item);
+                                            } else {
+                                              selectedMonths.remove(item);
+                                            }
+                                          }
+                                        });
+                                      },
+                                      isSelected: (selectedDays.contains(item) || selectedMonths.contains(item)),
                                       day: item)
                           ).toList()
                         ),
                       ),
                     ),
+                    SizedBox(height: 10,),
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
@@ -314,6 +315,7 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                   ],
                 ),
               ),
+              SizedBox(height: 10,),
               GestureDetector(
                 onTap: () {
                   if(titleController.text.isEmpty) {
@@ -327,6 +329,8 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                         day: 'time'
                     ));
                   }
+
+                  print(selectedDays);
                 },
                 child: Container(
                   width: double.infinity,

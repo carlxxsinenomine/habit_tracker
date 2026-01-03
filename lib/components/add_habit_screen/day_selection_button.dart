@@ -4,8 +4,8 @@ import 'package:habit_tracker/constants.dart';
 class SelectionButton extends StatelessWidget {
   final VoidCallback? onPress;
   final String? day;
-
-  const SelectionButton({super.key, required this.onPress, required this.day});
+  final bool? isSelected;
+  const SelectionButton({super.key, required this.onPress, required this.day, this.isSelected});
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +16,10 @@ class SelectionButton extends StatelessWidget {
         width: 70,
         height: 40,
         decoration: BoxDecoration(
-          color: kSelectionButtonColor,
+          color: isSelected! ?  kSelectionButtonColor : kNotActiveDay,
           borderRadius: BorderRadius.circular(15)
         ),
-        child: Center(child: Text(day!)),
+        child: Center(child: Text(day!, style: TextStyle(color: isSelected! ? kActiveDay : kSelectionButtonColor),)),
       ),
     );
   }
