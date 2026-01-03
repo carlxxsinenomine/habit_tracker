@@ -13,7 +13,7 @@ class SelectionButton extends StatelessWidget {
       onTap: onPress,
       child: Container(
         margin: EdgeInsets.only(right: 10),
-        width: 80,
+        width: 70,
         height: 40,
         decoration: BoxDecoration(
           color: kSelectionButtonColor,

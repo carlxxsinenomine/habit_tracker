@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:habit_tracker/components/add_habit_screen/day_schedule_container.dart';
 import 'package:habit_tracker/components/add_habit_screen/day_selection_button.dart';
 import 'package:habit_tracker/components/add_habit_screen/schedule_button.dart';
 import 'package:habit_tracker/constants.dart';
 import 'package:habit_tracker/models/habit.dart';
 
 enum OPTION {one_time, daily, monthly}
+enum SCHEDULE {anytime, morning, afternoon, evening}
 
 class AddHabitScreen extends StatefulWidget {
   const AddHabitScreen({super.key});
@@ -14,19 +16,21 @@ class AddHabitScreen extends StatefulWidget {
 }
 
 class _AddHabitScreenState extends State<AddHabitScreen> {
-  final List<String> DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  final List<String> MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+  final List<String> days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  final List<String> months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
 
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
 
   OPTION selectedOption = OPTION.daily;
+  SCHEDULE selectedSchedule = SCHEDULE.anytime;
+
   List<String> activeSelection = [];
 
   @override
   void initState() {
     super.initState();
-    activeSelection = DAYS;
+    activeSelection = days;
   }
 
   void showWarningSnackBar(BuildContext context, String message) {
@@ -51,7 +55,6 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
   void showDaySelection() {
 
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +113,73 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                 ),
               ],
             ),
-
+            Container(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                decoration: BoxDecoration(
+                    color: Color(0xFFFBFBFB),
+                    borderRadius: BorderRadius.circular(15)
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      "Do it at",
+                      style: TextStyle(
+                        color: Colors.black54
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        DayScheduleContainer(
+                            onPress: () {
+                              setState(() {
+                                selectedSchedule = SCHEDULE.anytime;
+                              });
+                            },
+                            isPressed: (selectedSchedule == SCHEDULE.anytime),
+                            label: "Anytime"
+                        ),
+                        DayScheduleContainer(
+                            onPress: () {
+                              setState(() {
+                                selectedSchedule = SCHEDULE.morning;
+                              });
+                            },
+                            isPressed: (selectedSchedule == SCHEDULE.morning),
+                            label: "Morning"
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        DayScheduleContainer(
+                            onPress: () {
+                              setState(() {
+                                selectedSchedule = SCHEDULE.afternoon;
+                              });
+                            },
+                            isPressed: (selectedSchedule == SCHEDULE.afternoon),
+                            label: "Afternoon"
+                        ),
+                        DayScheduleContainer(
+                            onPress: () {
+                              setState(() {
+                                selectedSchedule = SCHEDULE.evening;
+                              });
+                            },
+                            isPressed: (selectedSchedule == SCHEDULE.evening),
+                            label: "Evening"
+                        ),
+                      ],
+                    )
+                  ],
+                )
+            ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
               decoration: BoxDecoration(
@@ -123,6 +192,9 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                   Text(
                       "Repeat",
                       style: kLabelStyle
+                  ),
+                  SizedBox(
+                    height: 10,
                   ),
                   Container(
                     height: 60,
@@ -146,7 +218,7 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                           onPress: () {
                             setState(() {
                               selectedOption = OPTION.daily;
-                              activeSelection = DAYS;
+                              activeSelection = days;
                             });
                           },
                           isPressed: selectedOption == OPTION.daily,
@@ -156,7 +228,7 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                           onPress: () {
                             setState(() {
                               selectedOption = OPTION.monthly;
-                              activeSelection = MONTHS;
+                              activeSelection = months;
                             });
                           },
                           isPressed: selectedOption == OPTION.monthly,
@@ -164,6 +236,16 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                         ),
                       ],
                     ),
+                  ),
+                  Row(
+                    children: <Widget>[
+                      IconButton(
+                          onPressed: () {},
+                          color: Colors.black54,
+                          icon: Icon(Icons.circle_outlined)
+                      ),
+                      Text('Everyday')
+                    ],
                   ),
                   Container(
                     margin: EdgeInsets.symmetric(vertical: 10),
@@ -174,7 +256,7 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                                 (item) => SelectionButton(
                                     onPress: () {},
                                     day: item)
-                            ).toList()
+                        ).toList()
                       ),
                     ),
                   ),
