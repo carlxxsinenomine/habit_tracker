@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 class HabitManager<T> {
   late List<T> habitList = [];
 
@@ -12,21 +14,21 @@ class HabitManager<T> {
 
 class Habit {
   final String _title;
-  final String _description;
-  final String _repeatedDays;
-  final String _day;
-  Habit({
-    description = "None",
-    required title,
-    required repeatedDays,
-    required day,
-  }) :  _title = title,
-        _repeatedDays = repeatedDays,
-        _day = day,
-        _description = description;
+  final String _scheduleTime;
+  final List<String> _habitSchedule;
+  final Color? _color;
 
-  String get day => _day;
+  Habit({
+    required title,
+    required habitSchedule,
+    required scheduleTime,
+    color
+  }) :  _title = title,
+        _habitSchedule = habitSchedule,
+        _color = color,
+        _scheduleTime = scheduleTime;
+
+  String get day => _scheduleTime;
   String get title => _title;
-  String get description => _description;
-  String get repeatedDays => _repeatedDays;
+  List<String> get repeatedDays => _habitSchedule;
 }

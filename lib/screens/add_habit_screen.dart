@@ -7,8 +7,8 @@ import 'package:habit_tracker/components/add_habit_screen/schedule_button.dart';
 import 'package:habit_tracker/constants.dart';
 import 'package:habit_tracker/models/habit.dart';
 
-enum OPTION {one_time, daily, monthly}
-enum SCHEDULE {anytime, morning, afternoon, evening}
+enum HABIT_SCHEDULE {one_time, daily, monthly}
+enum SCHEDULE_TIME {anytime, morning, afternoon, evening}
 
 class AddHabitScreen extends StatefulWidget {
   const AddHabitScreen({super.key});
@@ -24,12 +24,11 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
 
-  OPTION selectedOption = OPTION.daily;
-  SCHEDULE selectedSchedule = SCHEDULE.anytime;
-  bool everydayToggled = false;
+  HABIT_SCHEDULE selectedOption = HABIT_SCHEDULE.daily;
+  SCHEDULE_TIME selectedSchedule = SCHEDULE_TIME.anytime;
+  bool checkboxScheduleToggled = false;
   List<String> activeSelection = [];
-  List<String> selectedDays = [];
-  List<String> selectedMonths = [];
+  List<String> selectedSchedules = [];
 
   @override
   void initState() {
@@ -128,10 +127,10 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                             child: DayScheduleContainer(
                                 onPress: () {
                                   setState(() {
-                                    selectedSchedule = SCHEDULE.anytime;
+                                    selectedSchedule = SCHEDULE_TIME.anytime;
                                   });
                                 },
-                                isPressed: (selectedSchedule == SCHEDULE.anytime),
+                                isPressed: (selectedSchedule == SCHEDULE_TIME.anytime),
                                 label: "Anytime"
                             ),
                           ),
@@ -140,10 +139,10 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                             child: DayScheduleContainer(
                                 onPress: () {
                                   setState(() {
-                                    selectedSchedule = SCHEDULE.morning;
+                                    selectedSchedule = SCHEDULE_TIME.morning;
                                   });
                                 },
-                                isPressed: (selectedSchedule == SCHEDULE.morning),
+                                isPressed: (selectedSchedule == SCHEDULE_TIME.morning),
                                 label: "Morning"
                             ),
                           ),
@@ -156,10 +155,10 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                             child: DayScheduleContainer(
                                 onPress: () {
                                   setState(() {
-                                    selectedSchedule = SCHEDULE.afternoon;
+                                    selectedSchedule = SCHEDULE_TIME.afternoon;
                                   });
                                 },
-                                isPressed: (selectedSchedule == SCHEDULE.afternoon),
+                                isPressed: (selectedSchedule == SCHEDULE_TIME.afternoon),
                                 label: "Afternoon"
                             ),
                           ),
@@ -168,10 +167,10 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                             child: DayScheduleContainer(
                                 onPress: () {
                                   setState(() {
-                                    selectedSchedule = SCHEDULE.evening;
+                                    selectedSchedule = SCHEDULE_TIME.evening;
                                   });
                                 },
-                                isPressed: (selectedSchedule == SCHEDULE.evening),
+                                isPressed: (selectedSchedule == SCHEDULE_TIME.evening),
                                 label: "Evening"
                             ),
                           ),
@@ -209,30 +208,30 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                           ScheduleButton(
                             onPress: () {
                               setState(() {
-                                selectedOption = OPTION.one_time;
+                                selectedOption = HABIT_SCHEDULE.one_time;
                               });
                             },
-                            isPressed: selectedOption == OPTION.one_time,
+                            isPressed: selectedOption == HABIT_SCHEDULE.one_time,
                             label: "One Time",
                           ),
                           ScheduleButton(
                             onPress: () {
                               setState(() {
-                                selectedOption = OPTION.daily;
+                                selectedOption = HABIT_SCHEDULE.daily;
                                 activeSelection = days;
                               });
                             },
-                            isPressed: selectedOption == OPTION.daily,
+                            isPressed: selectedOption == HABIT_SCHEDULE.daily,
                             label: "Daily",
                           ),
                           ScheduleButton(
                             onPress: () {
                               setState(() {
-                                selectedOption = OPTION.monthly;
+                                selectedOption = HABIT_SCHEDULE.monthly;
                                 activeSelection = months;
                               });
                             },
-                            isPressed: selectedOption == OPTION.monthly,
+                            isPressed: selectedOption == HABIT_SCHEDULE.monthly,
                             label: "Monthly",
                           ),
                         ],
@@ -244,20 +243,37 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                         IconButton(
                             onPressed: () {
                               setState(() {
-                                if(!everydayToggled) {
-                                  everydayToggled = true;
-                                  selectedDays = [...days];
-                                }
-                                else {
-                                  everydayToggled = false;
-                                  selectedDays = [];
+                                if(selectedOption == HABIT_SCHEDULE.daily) {
+                                  if(!checkboxScheduleToggled) {
+                                    checkboxScheduleToggled = true;
+                                    selectedSchedules = [...days];
+                                  }
+                                  else {
+                                    checkboxScheduleToggled = false;
+                                    selectedSchedules = [];
+                                  }
+                                } else if (selectedOption == HABIT_SCHEDULE.monthly) {
+                                  if(!checkboxScheduleToggled) {
+                                    checkboxScheduleToggled = true;
+                                    selectedSchedules = [...months];
+                                  }
+                                  else {
+                                    checkboxScheduleToggled = false;
+                                    selectedSchedules = [];
+                                  }
                                 }
                               });
                             },
                             color: Colors.black54,
-                            icon: everydayToggled ? Icon(Icons.check_circle, color: Colors.black,) :Icon(Icons.circle_outlined)
+                            icon: (checkboxScheduleToggled ||
+                                (selectedOption == HABIT_SCHEDULE.daily &&
+                                    selectedSchedules.length == days.length) ||
+                                (selectedOption == HABIT_SCHEDULE.monthly &&
+                                    selectedSchedules.length == months.length)) ?
+                            Icon(Icons.check_circle, color: Colors.black,)
+                                :Icon(Icons.circle_outlined)
                         ),
-                        Text('Everyday', style: TextStyle(color: Colors.black),
+                        Text((selectedOption == HABIT_SCHEDULE.daily) ? 'Everyday' : 'Every Month', style: TextStyle(color: Colors.black),
                         )
                       ],
                     ),
@@ -271,28 +287,28 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                                   (item) => SelectionButton(
                                       onPress: () {
                                         setState(() {
-                                          if(selectedOption == OPTION.daily) {
-                                            if(!selectedDays.contains(item)) {
-                                              selectedDays.add(item);
+                                          if(selectedOption == HABIT_SCHEDULE.daily) {
+                                            if(!selectedSchedules.contains(item)) {
+                                              selectedSchedules.add(item);
                                             } else {
-                                              selectedDays.remove(item);
+                                              selectedSchedules.remove(item);
                                             }
 
-                                            if(selectedDays.length == 7) {
-                                              everydayToggled = true;
+                                            if(selectedSchedules.length == 7) {
+                                              checkboxScheduleToggled = true;
                                             } else {
-                                              everydayToggled = false;
+                                              checkboxScheduleToggled = false;
                                             }
-                                          } else if (selectedOption == OPTION.monthly) {
-                                            if(!selectedMonths.contains(item)) {
-                                              selectedMonths.add(item);
+                                          } else if (selectedOption == HABIT_SCHEDULE.monthly) {
+                                            if(!selectedSchedules.contains(item)) {
+                                              selectedSchedules.add(item);
                                             } else {
-                                              selectedMonths.remove(item);
+                                              selectedSchedules.remove(item);
                                             }
                                           }
                                         });
                                       },
-                                      isSelected: (selectedDays.contains(item) || selectedMonths.contains(item)),
+                                      isSelected: (selectedSchedules.contains(item) || selectedSchedules.contains(item)),
                                       day: item)
                           ).toList()
                         ),
@@ -321,16 +337,34 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                   if(titleController.text.isEmpty) {
                     showWarningSnackBar(context, 'Invalid Title.');
                   } else {
+                    List<String> schedules = [];
+
+                    if(selectedOption == HABIT_SCHEDULE.daily) {
+                      schedules = (checkboxScheduleToggled) ? ['Everyday'] : selectedSchedules;
+                    } else if(selectedOption == HABIT_SCHEDULE.monthly) {
+                      schedules = (checkboxScheduleToggled) ? ['Every Month'] : selectedSchedules;
+                    }
+
+                    String getScheduleTime() {
+                      switch(selectedSchedule) {
+                        case SCHEDULE_TIME.anytime:
+                          return "Anytime";
+                        case SCHEDULE_TIME.morning:
+                          return "Morning";
+                        case SCHEDULE_TIME.afternoon:
+                          return "Afternoon";
+                        case SCHEDULE_TIME.evening:
+                          return "Evening";
+                      }
+                    }
+
                     // Go back and send new Habit object
                     Navigator.pop(context, Habit(
                         title: titleController.text,
-                        description: descriptionController.text,
-                        repeatedDays: 'repeatedDays',
-                        day: 'time'
+                        habitSchedule: schedules,
+                        scheduleTime: getScheduleTime()
                     ));
                   }
-
-                  print(selectedDays);
                 },
                 child: Container(
                   width: double.infinity,
