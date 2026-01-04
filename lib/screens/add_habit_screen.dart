@@ -30,10 +30,13 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
   List<String> activeSelection = [];
   List<String> selectedSchedules = [];
 
+  late Color selectedColor;
+
   @override
   void initState() {
     super.initState();
     activeSelection = days;
+    selectedColor = Colors.red;
   }
 
   void showWarningSnackBar(BuildContext context, String message) {
@@ -95,11 +98,20 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                 decoration: BoxDecoration(
-                    color: Color(0xFFFBFBFB),
+                    color: selectedColor,
                     borderRadius: BorderRadius.circular(15)
                 ),
-                child: ColorPicker(onColorChanged: (Color value) {  },
-
+                child: ColorPicker(
+                  color: selectedColor,
+                  onColorChanged: (Color color) => setState(() => selectedColor = color),
+                  pickersEnabled: const <ColorPickerType, bool>{
+                    ColorPickerType.both: false,
+                    ColorPickerType.primary: false,
+                    ColorPickerType.accent: false,
+                    ColorPickerType.bw: false,
+                    ColorPickerType.custom: false,
+                    ColorPickerType.wheel: true,
+                  }
                 ),
               ),
               SizedBox(height: 10,),
