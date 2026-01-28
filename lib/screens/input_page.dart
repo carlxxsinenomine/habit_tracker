@@ -4,6 +4,7 @@ import 'package:habit_tracker/components/home/day_box.dart';
 import 'package:habit_tracker/components/home/habit_box.dart';
 import 'package:habit_tracker/models/habit.dart';
 import 'package:habit_tracker/screens/add_habit_screen.dart';
+import 'package:habit_tracker/screens/todo_screen.dart';
 
 class InputPage extends StatefulWidget {
   const InputPage({super.key});
@@ -20,7 +21,6 @@ class _InputPageState extends State<InputPage> {
     {"title": "Habit 2", "day": "Tuesday"}
   ];
 
-
   void _addHabit(String title, String day) {
     setState(() {
       habits.add(
@@ -28,7 +28,6 @@ class _InputPageState extends State<InputPage> {
       );
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +123,8 @@ class _InputPageState extends State<InputPage> {
                     (habit) => HabitBox(
                         onTap: () {},
                         title: habit.title,
-                        day: habit.day
+                        day: habit.day,
+                        color: habit.color,
                     )
                   ).toList()
                 ),
@@ -139,32 +139,66 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Container(
-                    padding:EdgeInsets.only(top: 40),
-                    child: Text("Left",
-                      style: TextStyle(
-                          color: Colors.black54),
-                    )
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => TodoScreen())
+                    );
+                  },
+                  child: Container(
+                      padding:EdgeInsets.only(top: 40),
+                      child: Icon(
+                          Icons.home_outlined,
+                        color: Colors.black,
+                      )
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => TodoScreen())
+                    );
+                  },
+                  child: Container(
+                      padding:EdgeInsets.only(top: 40),
+                      child: Icon(
+                        Icons.event_note_outlined,
+                        color: Colors.black,
+                      )
+                  ),
                 ),
                 AddButton(
                     onPressed: () async {
                       // _addHabit("Habit 1", "Everyday");
-                      final habit = await Navigator.push(
+                      final habit = await Navigator.pushNamed(
                           context,
-                          MaterialPageRoute(builder: (context) => AddHabitScreen())
+                          '/add_habit'
                       );
                       setState(() {
                         habitManager.addHabit(habit);
                       });
                     }
                 ),
-                Container(
-                    padding:EdgeInsets.only(top: 40),
-                    child: Text("Right",
-                      style: TextStyle(
-                          color: Colors.black54),
-                    )
-                )
+                GestureDetector(
+                  child: Container(
+                      padding:EdgeInsets.only(top: 40),
+                      child: Icon(
+                        Icons.dashboard_outlined,
+                        color: Colors.black,
+                      )
+                  ),
+                ),
+                GestureDetector(
+                  child: Container(
+                      padding:EdgeInsets.only(top: 40),
+                      child: Icon(
+                        Icons.person_2_outlined,
+                        color: Colors.black,
+                      )
+                  ),
+                ),
               ],
             ),
           )

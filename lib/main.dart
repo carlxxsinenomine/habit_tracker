@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habit_tracker/screens/add_habit_screen.dart';
+import 'package:habit_tracker/screens/todo_screen.dart';
 import 'screens/input_page.dart';
 
 void main() => runApp(HabitTracker());
@@ -17,6 +18,7 @@ class HabitTracker extends StatelessWidget {
       routes: {
         '/': (context) => InputPage(),
         '/add_habit': (context) => AddHabitScreen(),
+        '/notes_screen': (context) => TodoScreen()
       },
       theme: ThemeData.dark().copyWith(
         useMaterial3: false,

@@ -27,8 +27,8 @@ class AddButton extends StatelessWidget {
         turns: isPressed ? (exitAngle / (2 * pi)) : (addAngle / (2 * pi)), // sabi sa docs need daw 2*pi eh AHAHAHA
         duration: Duration(milliseconds: 100),
         child: Container(
-          width: 80,
-          height: 80,
+          width: 75,
+          height: 75,
           decoration: BoxDecoration(
               color: kAddButtonColor,
               borderRadius: BorderRadius.circular(15.0),

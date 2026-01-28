@@ -16,13 +16,13 @@ class Habit {
   final String _title;
   final String _scheduleTime;
   final List<String> _habitSchedule;
-  final Color? _color;
+  final Color _color;
 
   Habit({
     required title,
     required habitSchedule,
     required scheduleTime,
-    color
+    required color
   }) :  _title = title,
         _habitSchedule = habitSchedule,
         _color = color,
@@ -31,4 +31,5 @@ class Habit {
   String get day => _scheduleTime;
   String get title => _title;
   List<String> get repeatedDays => _habitSchedule;
+  Color get color => _color;
 }

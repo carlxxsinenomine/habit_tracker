@@ -22,7 +22,6 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
   final List<String> months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
 
   final titleController = TextEditingController();
-  final descriptionController = TextEditingController();
 
   HABIT_SCHEDULE selectedOption = HABIT_SCHEDULE.daily;
   SCHEDULE_TIME selectedSchedule = SCHEDULE_TIME.anytime;
@@ -46,7 +45,7 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
         style: const TextStyle(color: Colors.white),
       ),
       margin: EdgeInsets.only(bottom: 10),
-      backgroundColor: Colors.orange[800],
+      backgroundColor: Colors.white60,
       behavior: SnackBarBehavior.floating,
       duration: const Duration(seconds: 3),
       action: SnackBarAction(
@@ -84,13 +83,14 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                       Text("Habit Title", style: TextStyle(color: Colors.black,)),
                       TextField(
                         controller: titleController,
+                        style: TextStyle(color: Colors.black),
                         decoration: InputDecoration(
                           hintText: "Type here",
                           hintStyle: TextStyle(
                             color: Colors.black
-                          )
+                          ),
                         ),
-                      )
+                      ),
                     ],
                   )
               ),
@@ -374,7 +374,8 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                     Navigator.pop(context, Habit(
                         title: titleController.text,
                         habitSchedule: schedules,
-                        scheduleTime: getScheduleTime()
+                        scheduleTime: getScheduleTime(),
+                        color: selectedColor
                     ));
                   }
                 },

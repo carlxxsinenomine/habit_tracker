@@ -5,12 +5,14 @@ class HabitBox extends StatelessWidget {
   final VoidCallback onTap;
   final String title;
   final String day;
+  final Color? color;
 
   const HabitBox({
     super.key,
     required this.onTap,
     required this.title,
-    required this.day
+    required this.day,
+    required this.color
   });
 
   @override
@@ -24,7 +26,7 @@ class HabitBox extends StatelessWidget {
             bottom: 15.0
         ),
         decoration: BoxDecoration(
-            color: Color(0xFF8BAE66),
+            color: color,
             borderRadius: BorderRadius.circular(15.0),
             boxShadow: [
               BoxShadow(
