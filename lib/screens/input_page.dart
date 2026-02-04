@@ -4,7 +4,9 @@ import 'package:habit_tracker/components/home/day_box.dart';
 import 'package:habit_tracker/components/home/habit_box.dart';
 import 'package:habit_tracker/models/habit.dart';
 import 'package:habit_tracker/screens/add_habit_screen.dart';
-import 'package:habit_tracker/screens/todo_screen.dart';
+import 'package:habit_tracker/screens/notes_screen.dart';
+
+import 'package:habit_tracker/components/global_components.dart';
 
 class InputPage extends StatefulWidget {
   const InputPage({super.key});
@@ -133,74 +135,17 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           // Buttons section
-          SizedBox(
-            // color: Colors.cyan,
-            height: 167.0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => TodoScreen())
-                    );
-                  },
-                  child: Container(
-                      padding:EdgeInsets.only(top: 40),
-                      child: Icon(
-                          Icons.home_outlined,
-                        color: Colors.black,
-                      )
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => TodoScreen())
-                    );
-                  },
-                  child: Container(
-                      padding:EdgeInsets.only(top: 40),
-                      child: Icon(
-                        Icons.event_note_outlined,
-                        color: Colors.black,
-                      )
-                  ),
-                ),
-                AddButton(
-                    onPressed: () async {
-                      // _addHabit("Habit 1", "Everyday");
-                      final habit = await Navigator.pushNamed(
-                          context,
-                          '/add_habit'
-                      );
-                      setState(() {
-                        habitManager.addHabit(habit);
-                      });
-                    }
-                ),
-                GestureDetector(
-                  child: Container(
-                      padding:EdgeInsets.only(top: 40),
-                      child: Icon(
-                        Icons.dashboard_outlined,
-                        color: Colors.black,
-                      )
-                  ),
-                ),
-                GestureDetector(
-                  child: Container(
-                      padding:EdgeInsets.only(top: 40),
-                      child: Icon(
-                        Icons.person_2_outlined,
-                        color: Colors.black,
-                      )
-                  ),
-                ),
-              ],
-            ),
+          MainButton(
+            onPress: () async {
+                // _addHabit("Habit 1", "Everyday");
+                final habit = await Navigator.pushNamed(
+                context,
+                '/add_habit'
+                );
+                setState(() {
+                habitManager.addHabit(habit);
+                });
+              },
           )
         ],
       ),
